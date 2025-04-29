@@ -4,7 +4,7 @@ function decodeBase64(str) {
   return atob(str);
 }
 
-fetch('/games/password.json')
+fetch('password.json')
   .then(response => response.json())
   .then(data => {
     correctPassword = decodeBase64(data.password);

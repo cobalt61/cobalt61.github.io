@@ -12,26 +12,34 @@ fetch('games/password.json')
 
 const contentTarget = document.getElementById("contentTarget");
 
-function attachFormListener() {
-  const passForm = document.getElementById("passForm");
-
-  if (!passForm) {
-    console.error("Password form not found!");
-    return; // Exit if no form
+function showTemplate(templateId) {
+  const template = document.getElementById(templateId);
+  if (!template) {
+    console.error("Template not found:", templateId);
+    return;
   }
 
-  passForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+  const clone = template.content.cloneNode(true);
+  contentTarget.innerHTML = ""; // Clear old content
+  contentTarget.appendChild(clone);
 
-    const inputElement = document.getElementById("pass");
-    const changingP = document.getElementById("changingP");
+  attachFormListener(); // <- We **attach listener AFTER** the template is inserted
+}
 
-    if (!inputElement) {
-      console.error("Password input field not found!");
-      return;
-    }
+function attachFormListener() {
+  const passForm = document.getElementById("passForm");
+  const passInput = document.getElementById("pass");
+  const changingP = document.getElementById("changingP");
 
-    const inputValue = inputElement.value.trim();
+  if (!passForm || !passInput) {
+    console.log("No form or input yet, skipping listener attach.");
+    return;
+  }
+
+  passForm.addEventListener('submit', function (e) {
+    e.preventDefault(); // e will always be correct here
+
+    const inputValue = passInput.value.trim();
     console.log("Form input value:", inputValue);
 
     if (inputValue === correctPassword) {
@@ -39,9 +47,8 @@ function attachFormListener() {
       if (changingP) changingP.innerText = "Access Granted";
 
       const d = new Date();
-      d.setTime(d.getTime() + 1 * 24 * 60 * 60 * 1000); // 1 day
-      const expires = "expires=" + d.toUTCString();
-      document.cookie = "access=granted;" + expires + ";path=/";
+      d.setTime(d.getTime() + (1 * 24 * 60 * 60 * 1000)); // 1 day
+      document.cookie = "access=granted; expires=" + d.toUTCString() + "; path=/";
 
       showTemplate("web-content");
     } else {
@@ -51,21 +58,6 @@ function attachFormListener() {
       showTemplate("password-blocker");
     }
   });
-}
-
-function showTemplate(templateId) {
-  const template = document.getElementById(templateId);
-  if (!template) {
-    console.error("Template not found:", templateId);
-    return;
-  }
-
-  const clone = template.content.cloneNode(true);
-  contentTarget.innerHTML = ""; // Clear previous content
-  contentTarget.appendChild(clone);
-
-  // Important: Reattach form listener **after inserting the template**
-  attachFormListener();
 }
 
 window.addEventListener("DOMContentLoaded", () => {

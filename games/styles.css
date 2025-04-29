@@ -1,38 +1,70 @@
-body{
+body {
   font-family: "Cherry Bomb One", system-ui;
 }
-.navigation-bar{
+
+.navigation-bar {
   background-color: black;
   border-style: solid;
   border-radius: 20px;
-  height:1.5em;
-  border-color:gray;
+  height: 1.5em;
+  border-color: gray;
 }
-.navigation-bar a{
-  font-size:1em;
-  margin:20px;
+
+.navigation-bar a {
+  font-size: 1em;
+  margin: 20px;
   text-decoration: none;
 }
-.navigation-bar a:link{
-  color:gray;
+
+.navigation-bar a:link {
+  color: gray;
 }
-.navigation-bar a:visited{
-  color:white;
+
+.navigation-bar a:visited {
+  color: white;
 }
-.navigation-bar a:hover{
-  color:orange;
+
+.navigation-bar a:hover {
+  color: orange;
   cursor: pointer;
   font-size: 1.1em;
 }
-.navigation-bar a:active{
-  color:blue;
-  font-size:1.2em;
+
+.navigation-bar a:active {
+  color: blue;
+  font-size: 1.2em;
 }
-.OC{
-  float:right;
-  margin:20px;
-  font-size:1em;
+
+.OC {
+  float: right;
+  margin: 20px;
+  font-size: 1em;
   left: 80%;
-  width:30%;
-  height:30%;
+  width: 30%;
+  height: 30%;
+}
+
+/* Style the image */
+.gameimg {
+  width: 20%;
+  height: auto;
+  display: block; /* Ensures the image is a block-level element */
+}
+
+/* Grouping the game elements */
+.game {
+  margin-left: 10px;
+ 
+}
+
+/* Adjust the caption styling */
+.game-caption {
+  margin-top: 10px; /* Adds space between the image and the caption */
+  background-color:black;
+  border-color:gray;
+  border-style:groove;
+  border-radius:20px;
+  opacity: 1;
+  color:white;
+  text-align: center; /* Centers the caption */
 }

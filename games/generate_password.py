@@ -1,13 +1,13 @@
-import random
 import json
+import random
+import datetime
 
-random_password = round(random.uniform(1, 1_000_000_000), 6)
-
+# Generate random password
 password_data = {
-    "password": str(random_password)
+    "password": random.uniform(1, 1_000_000_000),
+    "generated_at": datetime.datetime.utcnow().isoformat()  # Timestamp to ensure change
 }
 
-with open("password.json", "w") as f:
-    json.dump(password_data, f, indent=2)
-
-print(f"Generated new password: {random_password}")
+# Save to the 'games' directory
+with open("games/password.json", "w") as f:
+    json.dump(password_data, f)

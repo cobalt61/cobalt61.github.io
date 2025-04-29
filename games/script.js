@@ -1,15 +1,14 @@
 let correctPassword = "";
 
-console.log('Fetching password.json...');  // Debug line to confirm fetch is triggered
+function decodeBase64(str) {
+  return atob(str);
+}
 
-fetch('/games/password.json')
-  .then(response => {
-    console.log('Response received:', response);  // Debug line to inspect the response object
-    return response.json();  // Parse the JSON
-  })
+fetch('games/password.json')
+  .then(response => response.json())
   .then(data => {
-    console.log("Loaded password:", data.password);
-    correctPassword = data.password;
+    correctPassword = decodeBase64(data.password);
+    console.log("Loaded password:", correctPassword);
   })
   .catch(error => {
     console.error("Failed to load password.json", error);

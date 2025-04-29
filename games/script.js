@@ -18,33 +18,34 @@ function showTemplate(templateId) {
   contentTarget.innerHTML = ""; // Clear previous content
   contentTarget.appendChild(clone);
 
-  // Now that the content is in the DOM, you can access changingP
+  // After loading the template, check if there is a form
+  const passForm = document.getElementById("passForm");
   const changingP = document.getElementById("changingP");
 
-  // Attach event listener after the template is rendered
-  const passForm = document.getElementById("passForm");
-  passForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+  if (passForm) {
+    passForm.addEventListener('submit', (e) => {
+      e.preventDefault();
 
-    const inputValue = document.getElementById("pass").value;
-    console.log("Form input value:", inputValue);
+      const inputValue = document.getElementById("pass").value;
+      console.log("Form input value:", inputValue);
 
-    if (inputValue === correctPassword) {
-      console.log("Access granted!");
-      changingP.innerText = "Access Granted";
+      if (inputValue === correctPassword) {
+        console.log("Access granted!");
+        if (changingP) changingP.innerText = "Access Granted";
 
-      const d = new Date();
-      d.setTime(d.getTime() + 1 * 24 * 60 * 60 * 1000); // 1 day from now
-      const expires = "expires=" + d.toUTCString();
-      document.cookie = "access=granted;" + expires + ";path=/";
+        const d = new Date();
+        d.setTime(d.getTime() + 1 * 24 * 60 * 60 * 1000); // 1 day from now
+        const expires = "expires=" + d.toUTCString();
+        document.cookie = "access=granted;" + expires + ";path=/";
 
-      showTemplate("web-content");
-    } else {
-      console.log("Access denied!");
-      changingP.innerText = "Access Denied";
-      showTemplate("password-blocker");
-    }
-  });
+        showTemplate("web-content");
+      } else {
+        console.log("Access denied!");
+        if (changingP) changingP.innerText = "Access Denied";
+        showTemplate("password-blocker");
+      }
+    });
+  }
 }
 
 // On page load, check for cookie

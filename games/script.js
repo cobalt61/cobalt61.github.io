@@ -14,14 +14,24 @@ const contentTarget = document.getElementById("contentTarget");
 
 function attachFormListener() {
   const passForm = document.getElementById("passForm");
-  const changingP = document.getElementById("changingP");
 
-  if (!passForm) return; // Exit if no form (safety check)
+  if (!passForm) {
+    console.error("Password form not found!");
+    return; // Exit if no form
+  }
 
   passForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const inputValue = document.getElementById("pass").value;
+    const inputElement = document.getElementById("pass");
+    const changingP = document.getElementById("changingP");
+
+    if (!inputElement) {
+      console.error("Password input field not found!");
+      return;
+    }
+
+    const inputValue = inputElement.value.trim();
     console.log("Form input value:", inputValue);
 
     if (inputValue === correctPassword) {
@@ -38,7 +48,7 @@ function attachFormListener() {
       console.log("Access denied!");
       if (changingP) changingP.innerText = "Access Denied";
 
-      showTemplate("password-blocker"); // Reloads form after fail
+      showTemplate("password-blocker");
     }
   });
 }
@@ -54,7 +64,8 @@ function showTemplate(templateId) {
   contentTarget.innerHTML = ""; // Clear previous content
   contentTarget.appendChild(clone);
 
-  attachFormListener(); // After inserting the new form, reattach the event listener
+  // Important: Reattach form listener **after inserting the template**
+  attachFormListener();
 }
 
 window.addEventListener("DOMContentLoaded", () => {

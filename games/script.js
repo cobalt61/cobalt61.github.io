@@ -1,6 +1,6 @@
 let correctPassword = "";
 
-fetch('password.json')
+fetch('games/password.json')
   .then(response => response.json())
   .then(data => {
     correctPassword = data.password;
@@ -16,45 +16,47 @@ function attachFormListener() {
   const passForm = document.getElementById("passForm");
   const changingP = document.getElementById("changingP");
 
-  if (passForm) {
-    passForm.addEventListener('submit', (e) => {
-      e.preventDefault();
+  if (!passForm) return; // Exit if no form (safety check)
 
-      const inputValue = document.getElementById("pass").value;
-      console.log("Form input value:", inputValue);
+  passForm.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-      if (inputValue === correctPassword) {
-        console.log("Access granted!");
-        if (changingP) changingP.innerText = "Access Granted";
+    const inputValue = document.getElementById("pass").value;
+    console.log("Form input value:", inputValue);
 
-        const d = new Date();
-        d.setTime(d.getTime() + 1 * 24 * 60 * 60 * 1000); // 1 day from now
-        const expires = "expires=" + d.toUTCString();
-        document.cookie = "access=granted;" + expires + ";path=/";
+    if (inputValue === correctPassword) {
+      console.log("Access granted!");
+      if (changingP) changingP.innerText = "Access Granted";
 
-        showTemplate("web-content");
-      } else {
-        console.log("Access denied!");
-        if (changingP) changingP.innerText = "Access Denied";
+      const d = new Date();
+      d.setTime(d.getTime() + 1 * 24 * 60 * 60 * 1000); // 1 day
+      const expires = "expires=" + d.toUTCString();
+      document.cookie = "access=granted;" + expires + ";path=/";
 
-        // Reload password-blocker form
-        showTemplate("password-blocker");
-      }
-    });
-  }
+      showTemplate("web-content");
+    } else {
+      console.log("Access denied!");
+      if (changingP) changingP.innerText = "Access Denied";
+
+      showTemplate("password-blocker"); // Reloads form after fail
+    }
+  });
 }
 
 function showTemplate(templateId) {
   const template = document.getElementById(templateId);
+  if (!template) {
+    console.error("Template not found:", templateId);
+    return;
+  }
+
   const clone = template.content.cloneNode(true);
   contentTarget.innerHTML = ""; // Clear previous content
   contentTarget.appendChild(clone);
 
-  // IMPORTANT: Attach the form listener after injecting the new form
-  attachFormListener();
+  attachFormListener(); // After inserting the new form, reattach the event listener
 }
 
-// On page load
 window.addEventListener("DOMContentLoaded", () => {
   if (document.cookie.includes("access=granted")) {
     showTemplate("web-content");

@@ -4,7 +4,8 @@ function decodeBase64(str) {
   return atob(str);
 }
 
-fetch('password.json')
+fetch('https://raw.githubusercontent.com/cobalt61/cobalt61.github.io/main/games/password.json')
+
   .then(response => response.json())
   .then(data => {
     correctPassword = decodeBase64(data.password);

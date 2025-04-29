@@ -12,13 +12,7 @@ fetch('password.json')
 
 const contentTarget = document.getElementById("contentTarget");
 
-function showTemplate(templateId) {
-  const template = document.getElementById(templateId);
-  const clone = template.content.cloneNode(true);
-  contentTarget.innerHTML = ""; // Clear previous content
-  contentTarget.appendChild(clone);
-
-  // After loading the template, check if there is a form
+function attachFormListener() {
   const passForm = document.getElementById("passForm");
   const changingP = document.getElementById("changingP");
 
@@ -42,13 +36,25 @@ function showTemplate(templateId) {
       } else {
         console.log("Access denied!");
         if (changingP) changingP.innerText = "Access Denied";
+
+        // Reload password-blocker form
         showTemplate("password-blocker");
       }
     });
   }
 }
 
-// On page load, check for cookie
+function showTemplate(templateId) {
+  const template = document.getElementById(templateId);
+  const clone = template.content.cloneNode(true);
+  contentTarget.innerHTML = ""; // Clear previous content
+  contentTarget.appendChild(clone);
+
+  // IMPORTANT: Attach the form listener after injecting the new form
+  attachFormListener();
+}
+
+// On page load
 window.addEventListener("DOMContentLoaded", () => {
   if (document.cookie.includes("access=granted")) {
     showTemplate("web-content");

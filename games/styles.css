@@ -59,7 +59,11 @@ body {
   margin-left: 10px;
  
 }
-
+.slopeimg{
+  width: 10% !important;
+  height: auto;
+  display: block; /* Ensures the image is a block-level element */
+}
 /* Adjust the caption styling */
 .game-caption {
   margin-top: 10px; /* Adds space between the image and the caption */

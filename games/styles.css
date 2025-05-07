@@ -51,7 +51,7 @@ body {
   display: block; /* Ensures the image is a block-level element */
 }
 .game:hover {
-  transform: scale(1.1); /* Slightly enlarges the image on hover */
+  transform: scale(1.05); /* Slightly enlarges the image on hover */
   transition: transform 0.3s ease; /* Smooth transition for the scaling effect */
 }
 /* Grouping the game elements */
@@ -61,6 +61,7 @@ body {
 }
 .slopeimg{
   width: 10% !important;
+  left:50px;
   height: auto;
   display: block; /* Ensures the image is a block-level element */
 }

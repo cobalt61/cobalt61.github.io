@@ -1,9 +1,11 @@
 embed{
-    height:95%;
+    height:100%;
     width:100%;
 }
 body {
     font-family: "Cherry Bomb One", system-ui;
+    height:100vh;
+    width:100vw;
   }
   
   .navigation-bar {

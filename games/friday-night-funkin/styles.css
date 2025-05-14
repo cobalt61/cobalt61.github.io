@@ -1,4 +1,40 @@
-object{
+embed{
     height:95%;
     width:100%;
 }
+body {
+    font-family: "Cherry Bomb One", system-ui;
+  }
+  
+  .navigation-bar {
+    background-color: black;
+    border-style: solid;
+    border-radius: 20px;
+    height: 1.5em;
+    border-color: gray;
+  }
+  
+  .navigation-bar a {
+    font-size: 1em;
+    margin: 20px;
+    text-decoration: none;
+  }
+  
+  .navigation-bar a:link {
+    color: gray;
+  }
+  
+  .navigation-bar a:visited {
+    color: white;
+  }
+  
+  .navigation-bar a:hover {
+    color: orange;
+    cursor: pointer;
+    font-size: 1.1em;
+  }
+  
+  .navigation-bar a:active {
+    color: blue;
+    font-size: 1.2em;
+  }

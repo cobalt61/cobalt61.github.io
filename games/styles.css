@@ -50,10 +50,10 @@ body {
   height: auto;
   display: block; /* Ensures the image is a block-level element */
 }
-.game:hover {
+.game:hover .gameimg {
   transform: scale(1.1); /* Slightly enlarges the image on hover */
-  transition: transform 0.5s ease; /* Smooth transition for the scaling effect */
 }
+
 /* Grouping the game elements */
 .games {
   display: flex;
@@ -71,8 +71,9 @@ body {
 
 .gameimg {
   width: 100%;
-  height: auto;
+  height: 160px;
   display: block;
+  transition: transform 0.3s ease;
 }
 
 .game-caption {
@@ -84,7 +85,4 @@ body {
   padding: 4px 8px;
   text-align: center;
   width: 100%;
-}
-.fnfimg{
-  height:160px;
 }

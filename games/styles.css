@@ -51,28 +51,40 @@ body {
   display: block; /* Ensures the image is a block-level element */
 }
 .game:hover {
-  transform: scale(1.05); /* Slightly enlarges the image on hover */
-  transition: transform 0.3s ease; /* Smooth transition for the scaling effect */
+  transform: scale(1.1); /* Slightly enlarges the image on hover */
+  transition: transform 0.5s ease; /* Smooth transition for the scaling effect */
 }
 /* Grouping the game elements */
+.games {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
 .game {
-  margin-left: 10px;
- 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 160px; /* Controls box size — adjust as needed */
 }
-.slopeimg{
-  width: 10% !important;
-  left:50px;
+
+.gameimg {
+  width: 100%;
   height: auto;
-  display: block; /* Ensures the image is a block-level element */
+  display: block;
 }
-/* Adjust the caption styling */
+
 .game-caption {
-  margin-top: 10px; /* Adds space between the image and the caption */
-  background-color:black;
-  border-color:gray;
-  border-style:groove;
-  border-radius:20px;
-  opacity: 1;
-  color:white;
-  text-align: center; /* Centers the caption */
+  margin-top: 8px;
+  background-color: black;
+  color: white;
+  border: 2px groove gray;
+  border-radius: 20px;
+  padding: 4px 8px;
+  text-align: center;
+  width: 100%;
+}
+.fnfimg{
+  height:160px;
 }

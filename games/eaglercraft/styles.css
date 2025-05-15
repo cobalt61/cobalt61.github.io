@@ -40,3 +40,45 @@ body {
     color: blue;
     font-size: 1.2em;
   }
+ /* Style the image */
+.gameimg {
+  width: 20%;
+  height: auto;
+  display: block; /* Ensures the image is a block-level element */
+}
+.game:hover .gameimg {
+  transform: scale(1.1); /* Slightly enlarges the image on hover */
+}
+
+/* Grouping the game elements */
+.games {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 160px; /* Controls box size — adjust as needed */
+}
+
+.gameimg {
+  width: 100%;
+  height: 160px;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.game-caption {
+  margin-top: 8px;
+  background-color: black;
+  color: white;
+  border: 2px groove gray;
+  border-radius: 20px;
+  padding: 4px 8px;
+  text-align: center;
+  width: 100%;
+}

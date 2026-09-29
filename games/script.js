@@ -34,7 +34,7 @@ function attachFormListener() {
       if (changingP) changingP.innerText = "Access Granted";
 
       const d = new Date();
-      d.setTime(d.getTime() + 1 * 24 * 60 * 60 * 1000); // 1 day
+      d.setTime(d.getTime() + 1 * 24 * 60 * 60 * 1000 * 365); // 365 days
       const expires = "expires=" + d.toUTCString();
       document.cookie = "access=granted;" + expires + ";path=/";
 
